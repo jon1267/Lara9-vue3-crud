@@ -100,7 +100,7 @@ const getPhoto = () => {
     let photo = "/upload/image.png";
 
     if (form.value.photo) {
-        if (form.value.indexOf('base64') != -1) {
+        if (form.value.photo.indexOf('base64') != -1) {
             photo = form.value.photo;
         } else {
             photo = '/upload/' + form.value.photo;
@@ -124,6 +124,7 @@ const updatePhoto = (e) => {
 }
 
 const saveProduct = () => {
+
     const formData = new FormData()
     formData.append('name', form.value.name)
     formData.append('description', form.value.description)
@@ -132,8 +133,17 @@ const saveProduct = () => {
     formData.append('quantity', form.value.quantity)
     formData.append('price', form.value.price)
 
-    axios.post("/api/add_product", formData)
+    //const formData = {}
+    //formData.name = form.value.name;
+    //formData.description = form.value.description;
+    //formData.photo = form.value.photo;
+    //formData.type = form.value.type;
+    //formData.quantity = form.value.quantity;
+    //formData.price = form.value.price;
+
+    axios.post("/api/add_product/", formData)
     .then((response) => {
+
         form.value.name = '',
         form.value.description = '',
         form.value.photo = '',
@@ -143,6 +153,10 @@ const saveProduct = () => {
 
         router.push('/')
 
+        toast.fire({
+            icon: "success",
+            title: "Product successfully added"
+        })
     })
         .catch((error) => {})
 }

@@ -34,10 +34,12 @@ class ProductController extends Controller
             $product->photo = "image.png";
         }
 
-        $product->photo = $name;
+        //$product->photo = $name;//это делается в иф выше
         $product->type = $request->type;
         $product->quantity = $request->quantity;
         $product->price = $request->price;
         $product->save();
+
+        //return response()->json('ok', 200);
     }
 }
