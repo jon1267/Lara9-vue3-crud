@@ -15590,21 +15590,23 @@ __webpack_require__.r(__webpack_exports__);
     };
 
     var saveProduct = function saveProduct() {
-      var formData = new FormData();
-      formData.append('name', form.value.name);
-      formData.append('description', form.value.description);
-      formData.append('photo', form.value.photo);
-      formData.append('type', form.value.type);
-      formData.append('quantity', form.value.quantity);
-      formData.append('price', form.value.price); //const formData = {}
-      //formData.name = form.value.name;
-      //formData.description = form.value.description;
-      //formData.photo = form.value.photo;
-      //formData.type = form.value.type;
-      //formData.quantity = form.value.quantity;
-      //formData.price = form.value.price;
+      //const formData = new FormData()
+      //formData.append('name', form.value.name)
+      //formData.append('description', form.value.description)
+      //formData.append('photo', null)
+      //formData.append('type', form.value.type)
+      //formData.append('quantity', form.value.quantity)
+      //formData.append('price', form.value.price)
+      var formData = {};
+      formData.name = form.value.name;
+      formData.description = form.value.description;
+      formData.photo = null; // ! pic file name here not exist && form.value.photo led to bug post
 
-      axios.post("/api/add_product/", formData).then(function (response) {
+      formData.type = form.value.type;
+      formData.quantity = form.value.quantity;
+      formData.price = form.value.price;
+      console.log(formData);
+      axios.post("/api/add_product", formData).then(function (response) {
         form.value.name = '', form.value.description = '', form.value.photo = '', form.value.type = '', form.value.price = '', form.value.quantity = '', router.push('/');
         toast.fire({
           icon: "success",

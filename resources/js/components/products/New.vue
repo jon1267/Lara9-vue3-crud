@@ -125,23 +125,25 @@ const updatePhoto = (e) => {
 
 const saveProduct = () => {
 
-    const formData = new FormData()
-    formData.append('name', form.value.name)
-    formData.append('description', form.value.description)
-    formData.append('photo', form.value.photo)
-    formData.append('type', form.value.type)
-    formData.append('quantity', form.value.quantity)
-    formData.append('price', form.value.price)
+    //const formData = new FormData()
+    //formData.append('name', form.value.name)
+    //formData.append('description', form.value.description)
+    //formData.append('photo', null)
+    //formData.append('type', form.value.type)
+    //formData.append('quantity', form.value.quantity)
+    //formData.append('price', form.value.price)
 
-    //const formData = {}
-    //formData.name = form.value.name;
-    //formData.description = form.value.description;
-    //formData.photo = form.value.photo;
-    //formData.type = form.value.type;
-    //formData.quantity = form.value.quantity;
-    //formData.price = form.value.price;
+    const formData = {}
+    formData.name = form.value.name;
+    formData.description = form.value.description;
+    formData.photo = null; // ! pic file name here not exist && form.value.photo led to bug post
+    formData.type = form.value.type;
+    formData.quantity = form.value.quantity;
+    formData.price = form.value.price;
 
-    axios.post("/api/add_product/", formData)
+    console.log(formData);
+
+    axios.post("/api/add_product", formData)
     .then((response) => {
 
         form.value.name = '',
