@@ -45,7 +45,7 @@
                     <button class="btn-icon btn-icon-success" @click="onEdit(item.id)">
                         <i class="fas fa-pencil-alt"></i>
                     </button>
-                    <button class="btn-icon btn-icon-danger" >
+                    <button class="btn-icon btn-icon-danger" @click="deleteProduct(item.id)">
                         <i class="far fa-trash-alt"></i>
                     </button>
                 </div>
@@ -74,12 +74,40 @@
     const getProducts = async () => {
         let response = await axios.get("/api/get_all_product")
         products.value = response.data.products
-        //console.log('products', products.value)
     }
 
     const ourImage = (img) => { return "/upload/" + img }
 
     const onEdit = (id) => {
         router.push('/product/edit/' + id)
+    }
+
+    const deleteProduct = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "If You delete this, You can't go back",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel',
+        })
+        .then((result) => {
+            if (result.value) {
+                axios.get('/api/delete_product/'+id)
+                .then(()=>{
+                    //Swal.fire('Delete', 'Product delete successfully', 'success')
+                    toast.fire({
+                        icon: "success",
+                        title: "Product delete successfully"
+                    })
+
+                    getProducts()
+                })
+                .catch(()=>{
+                    Swal.fire('Failed', 'Something was wrong.', 'Warning')
+                })
+            }
+        })
     }
 </script>
