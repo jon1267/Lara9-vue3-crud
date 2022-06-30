@@ -15655,11 +15655,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       formData.type = form.value.type;
       formData.quantity = form.value.quantity;
-      formData.price = form.value.price;
-      formData.id = props.id; //console.log(formData);
+      formData.price = form.value.price; //formData.id = props.id;
 
-      axios.post("/api/update_product/".concat(formData.id), formData).then(function (response) {
-        console.log(response);
+      console.log(formData);
+      axios.post('/api/update_product/' + props.id, formData).then(function (response) {
         form.value.name = '', form.value.description = '', form.value.photo = '', form.value.type = '', form.value.price = '', form.value.quantity = '';
         router.push('/');
         toast.fire({

@@ -56,7 +56,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
 
-        if ($product->photo != $request->photo) {
+        /*if ($product->photo != $request->photo) {
             $position = strpos($request->photo, ';');
             $sub = substr($request->photo, 0 , $position);
             $ext = explode('/', $sub[1]);
@@ -71,9 +71,9 @@ class ProductController extends Controller
 
         } else {
             $name = $product->photo;
-        }
+        }*/
 
-        $product->photo = $name;
+        $product->photo = null; // $name;
         $product->type = $request->type;
         $product->quantity = $request->quantity;
         $product->price = $request->price;

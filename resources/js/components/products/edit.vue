@@ -151,13 +151,13 @@ const updateProduct = () => {
     formData.type = form.value.type;
     formData.quantity = form.value.quantity;
     formData.price = form.value.price;
-    formData.id = props.id;
+    //formData.id = props.id;
 
-    //console.log(formData);
+    console.log(formData);
 
-    axios.post(`/api/update_product/${formData.id}`, formData)
+    axios.post('/api/update_product/' + props.id, formData)
     .then((response) => {
-        console.log(response);
+
         form.value.name = '',
         form.value.description = '',
         form.value.photo = '',
